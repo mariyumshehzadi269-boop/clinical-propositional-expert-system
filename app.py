@@ -16,11 +16,11 @@ from clinical_information import (
 
 
 # ============================================================
-# PAGE CONFIG
+# PAGE CONFIGURATION
 # ============================================================
 
 st.set_page_config(
-    page_title="Intelligent Clinical Decision System",
+    page_title="Intelligent Clinical Decision Support System",
     page_icon="🩺",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -28,280 +28,155 @@ st.set_page_config(
 
 
 # ============================================================
-# CUSTOM CSS
+# CUSTOM RESPONSIVE CSS
 # ============================================================
 
 st.markdown(
     """
     <style>
 
-    /* ========================================================
-       GLOBAL
-       ======================================================== */
+    /* ---------- General page ---------- */
 
-    .stApp {
-        background: #f5f9fd;
+    .main {
+        padding-top: 1rem;
     }
 
     .block-container {
-        max-width: 1500px;
-        padding: 0.8rem 1.2rem 2rem 1.2rem;
+        max-width: 1200px;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
-    /* ========================================================
-       HEADER
-       ======================================================== */
+    /* ---------- Header ---------- */
 
-    .top-header {
-        background: linear-gradient(135deg, #174b91, #2878d7);
-        padding: 1rem 1.5rem;
-        border-radius: 0 0 12px 12px;
-        margin: -0.8rem -1.2rem 1.2rem -1.2rem;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0 3px 12px rgba(0, 60, 120, 0.18);
-    }
-
-    .header-left {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .header-icon {
-        font-size: 3rem;
-        line-height: 1;
-    }
-
-    .header-title {
-        font-size: 1.9rem;
-        font-weight: 700;
-        line-height: 1.15;
-    }
-
-    .header-subtitle {
-        font-size: 0.95rem;
-        margin-top: 0.25rem;
-        opacity: 0.95;
-    }
-
-    .header-right {
-        font-size: 0.85rem;
-        opacity: 0.95;
-        white-space: nowrap;
-    }
-
-    /* ========================================================
-       MAIN PANELS
-       ======================================================== */
-
-    .main-panel {
-        background: white;
-        border: 1px solid #c9dced;
-        border-radius: 9px;
-        padding: 0.8rem;
-        box-shadow: 0 2px 8px rgba(30, 80, 130, 0.05);
-    }
-
-    /* ========================================================
-       SECTION CARDS
-       ======================================================== */
-
-    .clinical-card {
+    .app-header {
+        padding: 1.4rem 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 1.2rem;
+        border: 1px solid rgba(128, 128, 128, 0.25);
         background: linear-gradient(
             135deg,
-            #f7fbff,
-            #eef7ff
+            rgba(240, 247, 255, 0.95),
+            rgba(248, 251, 255, 0.95)
         );
-        border: 1px solid #c7def4;
-        border-radius: 8px;
-        padding: 0.8rem;
+    }
+
+    .app-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .app-subtitle {
+        font-size: 1rem;
+        opacity: 0.75;
+        margin-bottom: 0;
+    }
+
+    /* ---------- Section cards ---------- */
+
+    .section-card {
+        padding: 1.2rem;
+        border-radius: 14px;
+        border: 1px solid rgba(128, 128, 128, 0.22);
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.55);
+    }
+
+    /* ---------- Result cards ---------- */
+
+    .result-card {
+        padding: 1rem 1.1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(128, 128, 128, 0.22);
         margin-bottom: 0.75rem;
+        background: rgba(250, 250, 250, 0.75);
     }
 
-    .clinical-card-title {
-        color: #12366b;
-        font-size: 1.05rem;
+    .result-title {
         font-weight: 700;
-        margin-bottom: 0.65rem;
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
     }
 
-    /* ========================================================
-       RESULT CARDS
-       ======================================================== */
-
-    .result-success {
-        background: #edfbf5;
-        border: 1px solid #a9e6d0;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 0.8rem;
+    .result-description {
+        font-size: 0.9rem;
+        opacity: 0.78;
     }
 
-    .result-condition {
-        background: #fff4f5;
-        border: 1px solid #ffb6c0;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .result-tests {
-        background: #eef7ff;
-        border: 1px solid #9ed0ff;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .result-medication {
-        background: #effaf7;
-        border: 1px solid #9edfc9;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .result-rules {
-        background: #f6f2ff;
-        border: 1px solid #c9b8ff;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .result-notice {
-        background: #fff9e9;
-        border: 1px solid #f5d68b;
-        border-radius: 10px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .result-heading {
-        font-weight: 700;
-        font-size: 1.05rem;
-        margin-bottom: 0.5rem;
-    }
-
-    /* ========================================================
-       ANALYZE BUTTON
-       ======================================================== */
+    /* ---------- Analyze button ---------- */
 
     div.stButton > button {
         width: 100%;
-        min-height: 3.2rem;
-        border-radius: 8px;
-        font-size: 1.05rem;
-        font-weight: 700;
-    }
-
-    /* ========================================================
-       TABS
-       ======================================================== */
-
-    button[data-baseweb="tab"] {
+        min-height: 3rem;
+        border-radius: 10px;
+        font-size: 1rem;
         font-weight: 600;
     }
 
-    /* ========================================================
-       MOBILE
-       ======================================================== */
+    /* ---------- Mobile ---------- */
 
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
 
         .block-container {
-            padding-left: 0.7rem;
-            padding-right: 0.7rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            padding-top: 0.5rem;
         }
 
-        .top-header {
-            margin-left: -0.7rem;
-            margin-right: -0.7rem;
-            padding: 0.85rem 1rem;
+        .app-header {
+            padding: 1rem;
+            border-radius: 12px;
         }
 
-        .header-icon {
-            font-size: 2.2rem;
+        .app-title {
+            font-size: 1.45rem;
+            line-height: 1.25;
         }
 
-        .header-title {
-            font-size: 1.35rem;
+        .app-subtitle {
+            font-size: 0.85rem;
         }
 
-        .header-subtitle {
-            font-size: 0.78rem;
+        .section-card {
+            padding: 0.85rem;
+            border-radius: 11px;
         }
 
-        .header-right {
-            display: none;
-        }
-
-        .main-panel {
-            padding: 0.55rem;
-        }
-
-        .clinical-card {
-            padding: 0.7rem;
-        }
-
-        .clinical-card-title {
-            font-size: 1rem;
-        }
-
-        .result-heading {
-            font-size: 0.98rem;
-        }
-
-        div.stButton > button {
-            min-height: 3.4rem;
-        }
-    }
-
-    /* ========================================================
-       SMALL MOBILE
-       ======================================================== */
-
-    @media (max-width: 600px) {
-
-        .header-left {
-            gap: 0.6rem;
-        }
-
-        .header-icon {
-            font-size: 1.9rem;
-        }
-
-        .header-title {
-            font-size: 1.15rem;
-        }
-
-        .header-subtitle {
-            font-size: 0.7rem;
-        }
-
-        .block-container {
-            padding-top: 0.4rem;
+        .result-card {
+            padding: 0.85rem;
         }
 
         h1 {
-            font-size: 1.35rem !important;
+            font-size: 1.45rem !important;
         }
 
         h2 {
-            font-size: 1.15rem !important;
+            font-size: 1.25rem !important;
         }
 
         h3 {
-            font-size: 1rem !important;
+            font-size: 1.1rem !important;
         }
+
+        /* Make inputs comfortable on mobile */
 
         input,
         textarea,
         select {
             font-size: 16px !important;
+        }
+
+        /* Full-width buttons */
+
+        div.stButton > button {
+            min-height: 3.2rem;
+        }
+
+        /* Reduce excessive vertical spacing */
+
+        [data-testid="stVerticalBlock"] {
+            gap: 0.65rem;
         }
     }
 
@@ -317,74 +192,38 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="top-header">
-
-        <div class="header-left">
-
-            <div class="header-icon">🩺</div>
-
-            <div>
-                <div class="header-title">
-                    Intelligent Clinical Decision System
-                </div>
-
-                <div class="header-subtitle">
-                    Propositional Logic Based Expert System for Decision Support
-                </div>
-            </div>
-
+    <div class="app-header">
+        <div class="app-title">
+            🩺 Intelligent Clinical Decision Support System
         </div>
-
-        <div class="header-right">
-            Better Decisions &nbsp; | &nbsp; Healthier Tomorrows
-            &nbsp;&nbsp; ❤️
+        <div class="app-subtitle">
+            Propositional Logic & Forward-Chaining Expert System
         </div>
-
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-
-# ============================================================
-# MAIN LAYOUT
-# ============================================================
-
-left_panel, right_panel = st.columns(
-    [1, 2],
-    gap="medium",
+st.info(
+    "Clinical decision-support tool for educational and clinician-review purposes. "
+    "It does not provide an autonomous medical diagnosis or prescription."
 )
 
 
 # ============================================================
-# LEFT PANEL — PATIENT INPUT
+# PATIENT INFORMATION
 # ============================================================
 
-with left_panel:
+with st.expander("👤 Patient Information", expanded=True):
 
-    st.markdown(
-        '<div class="main-panel">',
-        unsafe_allow_html=True,
-    )
+    st.markdown('<div class="section-card">', unsafe_allow_html=True)
 
-    st.markdown(
-        """
-        <div class="clinical-card">
-            <div class="clinical-card-title">
-                👤 Patient Information
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    col1, col2 = st.columns(2)
 
-    patient_col1, patient_col2 = st.columns(2)
-
-    with patient_col1:
-
+    with col1:
         patient_id = st.text_input(
             "Patient ID",
-            placeholder="ID",
+            placeholder="Enter patient ID",
         )
 
         age = st.number_input(
@@ -395,16 +234,26 @@ with left_panel:
             step=1,
         )
 
-    with patient_col2:
-
         gender = st.selectbox(
-            "Sex",
-            [
-                "Female",
-                "Male",
-                "Other",
-                "Prefer not to say",
-            ],
+            "Gender",
+            ["Male", "Female", "Other", "Prefer not to say"],
+        )
+
+        weight = st.number_input(
+            "Weight (kg)",
+            min_value=0.0,
+            max_value=300.0,
+            value=60.0,
+            step=0.5,
+        )
+
+    with col2:
+        height = st.number_input(
+            "Height (cm)",
+            min_value=0.0,
+            max_value=250.0,
+            value=165.0,
+            step=0.5,
         )
 
         symptom_duration = st.number_input(
@@ -415,114 +264,85 @@ with left_panel:
             step=1,
         )
 
+        main_complaint = st.text_input(
+            "Main complaint",
+            placeholder="e.g. fever and cough",
+        )
 
-    # ========================================================
-    # SYMPTOMS
-    # ========================================================
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown(
-        """
-        <div class="clinical-card">
-            <div class="clinical-card-title">
-                🧑‍⚕️ Symptoms
-            </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
-    symptoms = [
-        ("fever", "Fever"),
-        ("cough", "Cough"),
-        ("sore_throat", "Sore throat"),
-        ("headache", "Headache"),
-        ("shortness_of_breath", "Shortness of breath"),
-        ("vomiting", "Vomiting"),
-        ("chest_pain", "Chest pain"),
-        ("fatigue", "Fatigue"),
-        ("body_aches", "Body aches"),
-        ("runny_nose", "Runny nose"),
-        ("nausea", "Nausea"),
-        ("diarrhea", "Diarrhea"),
-        ("abdominal_pain", "Abdominal pain"),
-        ("dizziness", "Dizziness"),
-        ("chills", "Chills"),
-        ("rash", "Rash"),
-        ("joint_pain", "Joint pain"),
-        ("weakness", "Weakness"),
-        ("loss_of_appetite", "Loss of appetite"),
-        ("sweating", "Sweating"),
-    ]
+# ============================================================
+# SYMPTOMS
+# ============================================================
+
+SYMPTOMS = [
+    ("fever", "Fever"),
+    ("cough", "Cough"),
+    ("headache", "Headache"),
+    ("sore_throat", "Sore throat"),
+    ("fatigue", "Fatigue"),
+    ("body_aches", "Body aches"),
+    ("runny_nose", "Runny nose"),
+    ("shortness_of_breath", "Shortness of breath"),
+    ("chest_pain", "Chest pain"),
+    ("nausea", "Nausea"),
+    ("vomiting", "Vomiting"),
+    ("diarrhea", "Diarrhea"),
+    ("abdominal_pain", "Abdominal pain"),
+    ("dizziness", "Dizziness"),
+    ("chills", "Chills"),
+    ("rash", "Rash"),
+    ("joint_pain", "Joint pain"),
+    ("weakness", "Weakness"),
+    ("loss_of_appetite", "Loss of appetite"),
+    ("sweating", "Sweating"),
+]
+
+with st.expander("🩹 Symptoms", expanded=True):
 
     symptom_values = {}
 
-    symptom_cols = st.columns(2)
+    # Four columns on desktop.
+    # Streamlit automatically stacks these appropriately on narrow screens.
+    cols = st.columns(4)
 
-    for index, (key, label) in enumerate(symptoms):
-
-        with symptom_cols[index % 2]:
-
-            symptom_values[key] = st.checkbox(
-                label,
-                key=f"symptom_{key}",
-            )
-
-    st.markdown("</div>", unsafe_allow_html=True)
+    for index, (key, label) in enumerate(SYMPTOMS):
+        with cols[index % 4]:
+            symptom_values[key] = st.checkbox(label)
 
 
-    # ========================================================
-    # MEDICAL HISTORY
-    # ========================================================
+# ============================================================
+# MEDICAL HISTORY
+# ============================================================
 
-    st.markdown(
-        """
-        <div class="clinical-card">
-            <div class="clinical-card-title">
-                🏥 Medical History
-            </div>
-        """,
-        unsafe_allow_html=True,
-    )
+HISTORY = [
+    ("diabetes", "Diabetes"),
+    ("hypertension", "Hypertension"),
+    ("asthma", "Asthma"),
+    ("heart_disease", "Heart disease"),
+    ("kidney_disease", "Kidney disease"),
+    ("liver_disease", "Liver disease"),
+    ("drug_allergy", "Drug allergy"),
+    ("smoking", "Smoking"),
+]
 
-    history = [
-        ("diabetes", "Diabetes"),
-        ("asthma", "Asthma"),
-        ("hypertension", "Hypertension"),
-        ("heart_disease", "Heart disease"),
-        ("kidney_disease", "Kidney disease"),
-        ("liver_disease", "Liver disease"),
-        ("drug_allergy", "Drug allergy"),
-        ("smoking", "Smoking"),
-    ]
+with st.expander("📋 Medical History", expanded=False):
 
     history_values = {}
 
-    history_cols = st.columns(2)
+    cols = st.columns(2)
 
-    for index, (key, label) in enumerate(history):
-
-        with history_cols[index % 2]:
-
-            history_values[key] = st.checkbox(
-                label,
-                key=f"history_{key}",
-            )
-
-    st.markdown("</div>", unsafe_allow_html=True)
+    for index, (key, label) in enumerate(HISTORY):
+        with cols[index % 2]:
+            history_values[key] = st.checkbox(label)
 
 
-    # ========================================================
-    # VITAL SIGNS
-    # ========================================================
+# ============================================================
+# VITAL SIGNS
+# ============================================================
 
-    st.markdown(
-        """
-        <div class="clinical-card">
-            <div class="clinical-card-title">
-                ❤️ Vital Signs
-            </div>
-        """,
-        unsafe_allow_html=True,
-    )
+with st.expander("❤️ Vital Signs", expanded=False):
 
     vital_col1, vital_col2 = st.columns(2)
 
@@ -537,7 +357,7 @@ with left_panel:
         )
 
         heart_rate = st.number_input(
-            "Heart Rate (bpm)",
+            "Heart rate (bpm)",
             min_value=30,
             max_value=250,
             value=75,
@@ -545,7 +365,7 @@ with left_panel:
         )
 
         respiratory_rate = st.number_input(
-            "Respiratory Rate (/min)",
+            "Respiratory rate (/min)",
             min_value=5,
             max_value=80,
             value=16,
@@ -555,7 +375,7 @@ with left_panel:
     with vital_col2:
 
         systolic_bp = st.number_input(
-            "Systolic BP (mmHg)",
+            "Systolic blood pressure (mmHg)",
             min_value=50,
             max_value=250,
             value=120,
@@ -563,689 +383,437 @@ with left_panel:
         )
 
         oxygen_saturation = st.number_input(
-            "Oxygen Saturation (%)",
+            "Oxygen saturation (%)",
             min_value=50.0,
             max_value=100.0,
             value=98.0,
             step=0.1,
         )
 
-    st.markdown("</div>", unsafe_allow_html=True)
 
+# ============================================================
+# LABORATORY FINDINGS
+# ============================================================
 
-    # ========================================================
-    # ADDITIONAL DATA
-    # ========================================================
+with st.expander("🧪 Laboratory Findings", expanded=False):
 
-    with st.expander("🧪 Laboratory Findings & Clinical Notes"):
+    lab_col1, lab_col2 = st.columns(2)
 
-        lab_col1, lab_col2 = st.columns(2)
+    with lab_col1:
 
-        with lab_col1:
+        wbc = st.number_input(
+            "WBC",
+            min_value=0.0,
+            max_value=100.0,
+            value=7.0,
+            step=0.1,
+        )
 
-            wbc = st.number_input(
-                "WBC",
-                min_value=0.0,
-                max_value=100.0,
-                value=7.0,
-                step=0.1,
-            )
+        crp = st.number_input(
+            "CRP",
+            min_value=0.0,
+            max_value=500.0,
+            value=3.0,
+            step=0.1,
+        )
 
-            crp = st.number_input(
-                "CRP",
-                min_value=0.0,
-                max_value=500.0,
-                value=3.0,
-                step=0.1,
-            )
+    with lab_col2:
 
-        with lab_col2:
+        glucose = st.number_input(
+            "Glucose",
+            min_value=0.0,
+            max_value=1000.0,
+            value=100.0,
+            step=1.0,
+        )
 
-            glucose = st.number_input(
-                "Glucose",
-                min_value=0.0,
-                max_value=1000.0,
-                value=100.0,
-                step=1.0,
-            )
-
-            hemoglobin = st.number_input(
-                "Hemoglobin",
-                min_value=0.0,
-                max_value=30.0,
-                value=13.0,
-                step=0.1,
-            )
-
-        additional_notes = st.text_area(
-            "Additional Clinical Notes",
-            placeholder="Enter additional information...",
-            height=100,
+        hemoglobin = st.number_input(
+            "Hemoglobin",
+            min_value=0.0,
+            max_value=30.0,
+            value=13.0,
+            step=0.1,
         )
 
 
-    # ========================================================
-    # MAIN ANALYZE BUTTON
-    # ========================================================
+# ============================================================
+# ADDITIONAL NOTES
+# ============================================================
 
-    analyze = st.button(
-        "🔍  Analyze Patient",
-        type="primary",
-        use_container_width=True,
+with st.expander("📝 Additional Clinical Notes", expanded=False):
+
+    additional_notes = st.text_area(
+        "Notes",
+        placeholder=(
+            "Enter any additional clinical information..."
+        ),
+        height=120,
     )
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
 
 # ============================================================
-# RIGHT PANEL — RESULTS
+# ANALYZE BUTTON
 # ============================================================
 
-with right_panel:
+st.markdown("### 🔍 Clinical Analysis")
 
-    st.markdown(
-        '<div class="main-panel">',
-        unsafe_allow_html=True,
+analyze = st.button(
+    "Analyze Patient",
+    type="primary",
+    use_container_width=True,
+)
+
+
+# ============================================================
+# ANALYSIS
+# ============================================================
+
+if analyze:
+
+    # --------------------------------------------------------
+    # INPUT VALIDATION
+    # --------------------------------------------------------
+
+    if age < 1:
+        st.error("Analysis cannot proceed. Please enter a valid patient age.")
+        st.stop()
+
+    if weight <= 0:
+        st.error("Please enter a valid patient weight.")
+        st.stop()
+
+    if height <= 0:
+        st.error("Please enter a valid patient height.")
+        st.stop()
+
+    if symptom_duration < 0:
+        st.error("Please enter a valid symptom duration.")
+        st.stop()
+
+    if oxygen_saturation < 50 or oxygen_saturation > 100:
+        st.error("Please enter a valid oxygen saturation value.")
+        st.stop()
+
+    # --------------------------------------------------------
+    # CREATE PROPOSITIONAL FACTS
+    # --------------------------------------------------------
+
+    facts = create_patient_facts(
+        fever=symptom_values["fever"],
+        cough=symptom_values["cough"],
+        headache=symptom_values["headache"],
+        sore_throat=symptom_values["sore_throat"],
+        fatigue=symptom_values["fatigue"],
+        body_aches=symptom_values["body_aches"],
+        runny_nose=symptom_values["runny_nose"],
+        shortness_of_breath=symptom_values["shortness_of_breath"],
+        chest_pain=symptom_values["chest_pain"],
+        nausea=symptom_values["nausea"],
+        vomiting=symptom_values["vomiting"],
+        diarrhea=symptom_values["diarrhea"],
+        abdominal_pain=symptom_values["abdominal_pain"],
+        dizziness=symptom_values["dizziness"],
+        chills=symptom_values["chills"],
+        rash=symptom_values["rash"],
+        joint_pain=symptom_values["joint_pain"],
+        weakness=symptom_values["weakness"],
+        loss_of_appetite=symptom_values["loss_of_appetite"],
+        sweating=symptom_values["sweating"],
+        diabetes=history_values["diabetes"],
+        hypertension=history_values["hypertension"],
+        asthma=history_values["asthma"],
+        heart_disease=history_values["heart_disease"],
+        kidney_disease=history_values["kidney_disease"],
+        liver_disease=history_values["liver_disease"],
+        drug_allergy=history_values["drug_allergy"],
+        smoking=history_values["smoking"],
+        temperature=temperature,
+        heart_rate=heart_rate,
+        respiratory_rate=respiratory_rate,
+        systolic_bp=systolic_bp,
+        oxygen_saturation=oxygen_saturation,
+        wbc=wbc,
+        crp=crp,
+        glucose=glucose,
+        hemoglobin=hemoglobin,
     )
 
-    results_tab, rules_tab, explanation_tab, summary_tab = st.tabs(
-        [
-            "📄 Results",
-            "🔗 Logic Rules Fired",
-            "💡 Explanation",
-            "📋 Patient Summary",
-        ]
+    # --------------------------------------------------------
+    # FORWARD CHAINING
+    # --------------------------------------------------------
+
+    inferred_facts, fired_rules = forward_chain(
+        facts,
+        RULES,
     )
 
+    # --------------------------------------------------------
+    # RESULTS HEADER
+    # --------------------------------------------------------
 
-    # ========================================================
-    # DEFAULT STATE
-    # ========================================================
+    st.divider()
 
-    if not analyze:
+    st.header("📊 Clinical Assessment")
 
-        with results_tab:
+    st.caption(
+        f"Patient: {patient_id if patient_id else 'Not specified'}"
+    )
 
+    # --------------------------------------------------------
+    # RESULT METRICS
+    # --------------------------------------------------------
+
+    condition_count = sum(
+        1
+        for fact in CONDITION_FACTS
+        if fact in inferred_facts
+    )
+
+    test_count = sum(
+        1
+        for fact in TEST_FACTS
+        if fact in inferred_facts
+    )
+
+    review_count = sum(
+        1
+        for fact in REVIEW_FACTS
+        if fact in inferred_facts
+    )
+
+    metric1, metric2, metric3 = st.columns(3)
+
+    with metric1:
+        st.metric(
+            "Possible conditions",
+            condition_count,
+        )
+
+    with metric2:
+        st.metric(
+            "Tests to consider",
+            test_count,
+        )
+
+    with metric3:
+        st.metric(
+            "Clinical reviews",
+            review_count,
+        )
+
+    # --------------------------------------------------------
+    # POSSIBLE CONDITIONS
+    # --------------------------------------------------------
+
+    st.subheader("🩺 Possible Conditions / Clinical Evaluations")
+
+    condition_results = [
+        description
+        for fact, description in CONDITION_FACTS.items()
+        if fact in inferred_facts
+    ]
+
+    if condition_results:
+
+        for result in condition_results:
             st.markdown(
-                """
-                <div class="result-success">
-
-                    <div class="result-heading">
-                        👋 Ready for Analysis
+                f"""
+                <div class="result-card">
+                    <div class="result-title">🩺 {result}</div>
+                    <div class="result-description">
+                        Derived from the configured propositional rules.
                     </div>
-
-                    Enter the patient's information on the left
-                    and click <b>Analyze Patient</b> to generate
-                    rule-based clinical decision-support results.
-
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
-
-        with rules_tab:
-
-            st.info(
-                "Logic rules will appear here after patient analysis."
-            )
-
-        with explanation_tab:
-
-            st.info(
-                "The reasoning explanation will appear here after analysis."
-            )
-
-        with summary_tab:
-
-            st.info(
-                "The patient summary will appear here after analysis."
-            )
-
-
-    # ========================================================
-    # RUN ANALYSIS
-    # ========================================================
 
     else:
-
-        # ----------------------------------------------------
-        # VALIDATION
-        # ----------------------------------------------------
-
-        if age < 1:
-
-            st.error(
-                "Analysis cannot proceed. Please enter a valid patient age."
-            )
-            st.stop()
-
-        if oxygen_saturation < 50 or oxygen_saturation > 100:
-
-            st.error(
-                "Please enter a valid oxygen saturation value."
-            )
-            st.stop()
-
-        # ----------------------------------------------------
-        # CREATE FACTS
-        # ----------------------------------------------------
-
-        facts = create_patient_facts(
-
-            fever=symptom_values["fever"],
-            cough=symptom_values["cough"],
-            headache=symptom_values["headache"],
-            sore_throat=symptom_values["sore_throat"],
-            fatigue=symptom_values["fatigue"],
-            body_aches=symptom_values["body_aches"],
-            runny_nose=symptom_values["runny_nose"],
-            shortness_of_breath=symptom_values[
-                "shortness_of_breath"
-            ],
-            chest_pain=symptom_values["chest_pain"],
-            nausea=symptom_values["nausea"],
-            vomiting=symptom_values["vomiting"],
-            diarrhea=symptom_values["diarrhea"],
-            abdominal_pain=symptom_values["abdominal_pain"],
-            dizziness=symptom_values["dizziness"],
-            chills=symptom_values["chills"],
-            rash=symptom_values["rash"],
-            joint_pain=symptom_values["joint_pain"],
-            weakness=symptom_values["weakness"],
-            loss_of_appetite=symptom_values[
-                "loss_of_appetite"
-            ],
-            sweating=symptom_values["sweating"],
-
-            diabetes=history_values["diabetes"],
-            hypertension=history_values["hypertension"],
-            asthma=history_values["asthma"],
-            heart_disease=history_values["heart_disease"],
-            kidney_disease=history_values["kidney_disease"],
-            liver_disease=history_values["liver_disease"],
-            drug_allergy=history_values["drug_allergy"],
-            smoking=history_values["smoking"],
-
-            temperature=temperature,
-            heart_rate=heart_rate,
-            respiratory_rate=respiratory_rate,
-            systolic_bp=systolic_bp,
-            oxygen_saturation=oxygen_saturation,
-
-            wbc=wbc,
-            crp=crp,
-            glucose=glucose,
-            hemoglobin=hemoglobin,
+        st.info(
+            "No condition-related propositions were derived "
+            "from the current inputs."
         )
 
-        # ----------------------------------------------------
-        # FORWARD CHAINING
-        # ----------------------------------------------------
+    # --------------------------------------------------------
+    # TESTS
+    # --------------------------------------------------------
 
-        inferred_facts, fired_rules = forward_chain(
-            facts,
-            RULES,
-        )
+    st.subheader("🧪 Tests to Consider")
 
-        # ----------------------------------------------------
-        # DERIVED CONDITIONS
-        # ----------------------------------------------------
+    test_results = [
+        (fact, description)
+        for fact, description in TEST_FACTS.items()
+        if fact in inferred_facts
+    ]
 
-        condition_results = [
-            description
-            for fact, description in CONDITION_FACTS.items()
-            if fact in inferred_facts
-        ]
+    if test_results:
 
-        test_results = [
-            (fact, description)
-            for fact, description in TEST_FACTS.items()
-            if fact in inferred_facts
-        ]
-
-        review_results = [
-            (fact, description)
-            for fact, description in REVIEW_FACTS.items()
-            if fact in inferred_facts
-        ]
-
-        reasoning_trace = format_reasoning_trace(
-            fired_rules
-        )
-
-        derived_facts = [
-            fact
-            for fact in inferred_facts
-            if fact not in facts
-        ]
-
-
-        # ====================================================
-        # RESULTS TAB
-        # ====================================================
-
-        with results_tab:
+        for fact, description in test_results:
 
             st.markdown(
-                """
-                <div class="result-success">
-
-                    <div class="result-heading">
-                        🟢 Analysis Complete
-                    </div>
-
-                    Based on the provided information,
-                    the system has generated the following
-                    rule-derived clinical considerations.
-
+                f"""
+                <div class="result-card">
+                    <div class="result-title">🧪 {description}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
+            if fact in TEST_INFORMATION:
 
-            # ------------------------------------------------
-            # CONDITIONS
-            # ------------------------------------------------
+                information = TEST_INFORMATION[fact]
 
-            st.markdown(
-                """
-                <div class="result-condition">
-
-                    <div class="result-heading">
-                        🩺 Possible Condition(s) / Clinical Evaluations
-                    </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            if condition_results:
-
-                for number, result in enumerate(
-                    condition_results,
-                    start=1,
+                with st.expander(
+                    f"Information: {information['name']}"
                 ):
-
-                    st.markdown(
-                        f"{number}. **{result}**"
+                    st.write(
+                        f"**Purpose:** {information['purpose']}"
+                    )
+                    st.caption(
+                        information["note"]
                     )
 
-            else:
+    else:
+        st.info(
+            "No test-related propositions were derived."
+        )
 
-                st.write(
-                    "No condition-related propositions were derived."
-                )
+    # --------------------------------------------------------
+    # CLINICAL REVIEW / SAFETY
+    # --------------------------------------------------------
 
-            st.markdown(
-                "</div>",
-                unsafe_allow_html=True,
-            )
+    st.subheader("⚕️ Clinical Review / Safety")
 
+    review_results = [
+        (fact, description)
+        for fact, description in REVIEW_FACTS.items()
+        if fact in inferred_facts
+    ]
 
-            # ------------------------------------------------
-            # TESTS
-            # ------------------------------------------------
+    if review_results:
 
-            st.markdown(
-                """
-                <div class="result-tests">
+        for fact, description in review_results:
 
-                    <div class="result-heading">
-                        🧪 Recommended Tests to Consider
-                    </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            st.warning(description)
 
-            if test_results:
+            if fact in MEDICATION_INFORMATION:
 
-                for fact, description in test_results:
+                medication = MEDICATION_INFORMATION[fact]
 
-                    st.markdown(
-                        f"• **{description}**"
-                    )
-
-                    if fact in TEST_INFORMATION:
-
-                        information = TEST_INFORMATION[fact]
-
-                        st.caption(
-                            f"Purpose: {information['purpose']}"
-                        )
-
-            else:
-
-                st.write(
-                    "No test-related propositions were derived."
-                )
-
-            st.markdown(
-                "</div>",
-                unsafe_allow_html=True,
-            )
-
-
-            # ------------------------------------------------
-            # MEDICATION / CLINICAL REVIEW
-            # ------------------------------------------------
-
-            st.markdown(
-                """
-                <div class="result-medication">
-
-                    <div class="result-heading">
-                        💊 Medication Information
-                        (for Clinician Review)
-                    </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            medication_items = []
-
-            for fact, description in review_results:
-
-                if fact in MEDICATION_INFORMATION:
-
-                    medication_items.append(
-                        MEDICATION_INFORMATION[fact]
-                    )
-
-            if medication_items:
-
-                for medication in medication_items:
-
-                    st.markdown(
-                        f"• **{medication['category']}**"
-                    )
+                with st.expander(
+                    f"Medication information: {medication['category']}"
+                ):
 
                     st.write(
                         medication["information"]
                     )
 
                     st.caption(
-                        medication["safety_note"]
+                        f"Safety note: {medication['safety_note']}"
                     )
 
-            else:
+    else:
 
-                st.write(
-                    "No medication-related information was triggered."
+        st.success(
+            "No additional clinical-review propositions "
+            "were triggered by the configured rules."
+        )
+
+    # --------------------------------------------------------
+    # REASONING TRACE
+    # --------------------------------------------------------
+
+    st.subheader("🔎 Propositional Logic Reasoning")
+
+    reasoning_trace = format_reasoning_trace(
+        fired_rules
+    )
+
+    if reasoning_trace:
+
+        for step in reasoning_trace:
+
+            with st.expander(
+                f"Rule {step['rule_id']}"
+            ):
+                st.code(
+                    step["text"],
+                    language="text",
                 )
 
-            st.markdown(
-                "</div>",
-                unsafe_allow_html=True,
+    else:
+
+        st.info(
+            "No reasoning steps were generated."
+        )
+
+    # --------------------------------------------------------
+    # DERIVED PROPOSITIONS
+    # --------------------------------------------------------
+
+    st.subheader("🧠 Derived Propositions")
+
+    derived = [
+        fact
+        for fact in inferred_facts
+        if fact not in facts
+    ]
+
+    if derived:
+
+        st.write(
+            ", ".join(derived)
+        )
+
+    else:
+
+        st.info(
+            "No additional propositions were derived."
+        )
+
+    # --------------------------------------------------------
+    # PATIENT PROPOSITIONS
+    # --------------------------------------------------------
+
+    with st.expander("📋 Patient Propositions"):
+
+        true_patient_facts = [
+            fact
+            for fact, value in facts.items()
+            if value is True
+        ]
+
+        if true_patient_facts:
+
+            for fact in true_patient_facts:
+                st.write(f"• {fact}")
+
+        else:
+
+            st.info(
+                "No positive patient propositions were recorded."
             )
 
-
-            # ------------------------------------------------
-            # RULES FIRED SUMMARY
-            # ------------------------------------------------
-
-            st.markdown(
-                """
-                <div class="result-rules">
-
-                    <div class="result-heading">
-                        ⚙️ Rules That Fired
-                    </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            if fired_rules:
-
-                for rule in fired_rules:
-
-                    conditions = " ∧ ".join(
-                        rule["conditions"]
-                    )
-
-                    st.markdown(
-                        f"• **{rule['rule_id']}**: "
-                        f"`{conditions}` → "
-                        f"`{rule['conclusion']}`"
-                    )
-
-            else:
-
-                st.write(
-                    "No rules were triggered."
-                )
-
-            st.markdown(
-                "</div>",
-                unsafe_allow_html=True,
-            )
-
-
-            # ------------------------------------------------
-            # IMPORTANT NOTICE
-            # ------------------------------------------------
-
-            st.markdown(
-                """
-                <div class="result-notice">
-
-                    <div class="result-heading">
-                        ⚠️ Important Notice
-                    </div>
-
-                    This system provides decision support
-                    based on predefined propositional rules
-                    and does not replace professional medical
-                    judgment.
-
-                    <br><br>
-
-                    Always consult a qualified healthcare
-                    professional for final diagnosis and
-                    treatment decisions.
-
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-
-        # ====================================================
-        # LOGIC RULES TAB
-        # ====================================================
-
-        with rules_tab:
-
-            st.subheader("🔗 Logic Rules Fired")
-
-            if fired_rules:
-
-                for rule in fired_rules:
-
-                    conditions = " AND ".join(
-                        rule["conditions"]
-                    )
-
-                    st.markdown(
-                        f"""
-                        **{rule['rule_id']}**
-
-                        `{conditions}`
-
-                        ↓
-
-                        `{rule['conclusion']}`
-                        """
-                    )
-
-                    st.divider()
-
-            else:
-
-                st.info(
-                    "No rules fired for the current patient data."
-                )
-
-
-        # ====================================================
-        # EXPLANATION TAB
-        # ====================================================
-
-        with explanation_tab:
-
-            st.subheader("💡 Explanation")
-
-            if reasoning_trace:
-
-                for step in reasoning_trace:
-
-                    st.markdown(
-                        f"**{step['rule_id']}**"
-                    )
-
-                    st.code(
-                        step["text"],
-                        language="text",
-                    )
-
-            else:
-
-                st.info(
-                    "No reasoning steps were generated."
-                )
-
-            st.subheader("🧠 Derived Propositions")
-
-            if derived_facts:
-
-                for fact in derived_facts:
-
-                    st.write(
-                        f"• `{fact}`"
-                    )
-
-            else:
-
-                st.info(
-                    "No additional propositions were derived."
-                )
-
-
-        # ====================================================
-        # PATIENT SUMMARY TAB
-        # ====================================================
-
-        with summary_tab:
-
-            st.subheader("📋 Patient Summary")
-
-            summary_col1, summary_col2 = st.columns(2)
-
-            with summary_col1:
-
-                st.write(
-                    f"**Patient ID:** "
-                    f"{patient_id or 'Not specified'}"
-                )
-
-                st.write(
-                    f"**Age:** {age}"
-                )
-
-                st.write(
-                    f"**Sex:** {gender}"
-                )
-
-                st.write(
-                    f"**Symptom duration:** "
-                    f"{symptom_duration} day(s)"
-                )
-
-            with summary_col2:
-
-                st.write(
-                    f"**Temperature:** "
-                    f"{temperature} °C"
-                )
-
-                st.write(
-                    f"**Heart rate:** "
-                    f"{heart_rate} bpm"
-                )
-
-                st.write(
-                    f"**Respiratory rate:** "
-                    f"{respiratory_rate} /min"
-                )
-
-                st.write(
-                    f"**Oxygen saturation:** "
-                    f"{oxygen_saturation}%"
-                )
-
-
-            st.subheader("Positive Symptoms")
-
-            positive_symptoms = [
-                label
-                for key, label in symptoms
-                if symptom_values[key]
-            ]
-
-            if positive_symptoms:
-
-                st.write(
-                    ", ".join(positive_symptoms)
-                )
-
-            else:
-
-                st.write(
-                    "No positive symptoms selected."
-                )
-
-
-            st.subheader("Medical History")
-
-            positive_history = [
-                label
-                for key, label in history
-                if history_values[key]
-            ]
-
-            if positive_history:
-
-                st.write(
-                    ", ".join(positive_history)
-                )
-
-            else:
-
-                st.write(
-                    "No relevant medical history selected."
-                )
-
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
-# ============================================================
-# FOOTER
-# ============================================================
-
-st.markdown(
-    """
-    <div style="
-        text-align:center;
-        color:#66788a;
-        font-size:0.78rem;
-        margin-top:1rem;
-    ">
-        Intelligent Clinical Decision Support System
-        &nbsp; • &nbsp;
-        Propositional Logic & Forward Chaining
-        &nbsp; • &nbsp;
-        Educational / Clinical Review Prototype
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+    # --------------------------------------------------------
+    # FINAL SAFETY NOTICE
+    # --------------------------------------------------------
+
+    st.divider()
+
+    st.warning(
+        """
+        **Clinical safety notice**
+
+        This system is an educational clinical decision-support
+        prototype based on propositional logic and forward chaining.
+
+        Its outputs represent rule-derived possibilities and
+        considerations. They must not be treated as a definitive
+        diagnosis, prescription, or substitute for professional
+        clinical judgment.
+
+        Medication selection, dosing, contraindications,
+        interactions, testing decisions, and patient management
+        require assessment by a qualified healthcare professional.
+        """
+    )
