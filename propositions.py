@@ -1,0 +1,90 @@
+def create_patient_facts(
+    fever,
+    cough,
+    headache,
+    sore_throat,
+    fatigue,
+    body_aches,
+    runny_nose,
+    shortness_of_breath,
+    chest_pain,
+    nausea,
+    vomiting,
+    diarrhea,
+    abdominal_pain,
+    dizziness,
+    chills,
+    rash,
+    joint_pain,
+    weakness,
+    loss_of_appetite,
+    sweating,
+    diabetes,
+    hypertension,
+    asthma,
+    heart_disease,
+    kidney_disease,
+    liver_disease,
+    drug_allergy,
+    smoking,
+    temperature,
+    heart_rate,
+    respiratory_rate,
+    systolic_bp,
+    oxygen_saturation,
+    wbc,
+    crp,
+    glucose,
+    hemoglobin
+):
+
+    facts = {
+        "fever": fever,
+        "cough": cough,
+        "headache": headache,
+        "sore_throat": sore_throat,
+        "fatigue": fatigue,
+        "body_aches": body_aches,
+        "runny_nose": runny_nose,
+        "shortness_of_breath": shortness_of_breath,
+        "chest_pain": chest_pain,
+        "nausea": nausea,
+        "vomiting": vomiting,
+        "diarrhea": diarrhea,
+        "abdominal_pain": abdominal_pain,
+        "dizziness": dizziness,
+        "chills": chills,
+        "rash": rash,
+        "joint_pain": joint_pain,
+        "weakness": weakness,
+        "loss_of_appetite": loss_of_appetite,
+        "sweating": sweating,
+        "diabetes": diabetes,
+        "hypertension": hypertension,
+        "asthma": asthma,
+        "heart_disease": heart_disease,
+        "kidney_disease": kidney_disease,
+        "liver_disease": liver_disease,
+        "drug_allergy": drug_allergy,
+        "smoking": smoking,
+        "temperature": temperature,
+        "heart_rate": heart_rate,
+        "respiratory_rate": respiratory_rate,
+        "systolic_bp": systolic_bp,
+        "oxygen_saturation": oxygen_saturation,
+        "wbc": wbc,
+        "crp": crp,
+        "glucose": glucose,
+        "hemoglobin": hemoglobin,
+    }
+
+    facts["high_fever"] = temperature >= 38.0
+    facts["tachycardia"] = heart_rate > 100
+    facts["high_respiratory_rate"] = respiratory_rate > 20
+    facts["low_oxygen"] = oxygen_saturation < 94
+    facts["elevated_wbc"] = wbc > 11.0
+    facts["elevated_crp"] = crp > 5.0
+    facts["high_glucose"] = glucose > 126
+    facts["low_hemoglobin"] = hemoglobin < 12.0
+
+    return facts
